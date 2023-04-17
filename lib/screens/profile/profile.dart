@@ -5,7 +5,6 @@ import 'package:attendance_vimigo/services/user_database.dart';
 import 'package:attendance_vimigo/shared/constant.dart';
 import 'package:flutter/material.dart';
 
-
 import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
@@ -20,7 +19,6 @@ class _ProfileState extends State<Profile> {
   bool isLoading = false;
 
   get userData => UserData();
-
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +59,7 @@ class _ProfileState extends State<Profile> {
             ),
             backgroundColor: Colors.white,
             body: Center(
-              child: Text('Dilemma'),
-              /* Container(
+              child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: StreamBuilder<UserData>(
                     stream: UserDatabaseService(uid: user!.uid).userData,
@@ -102,24 +99,14 @@ class _ProfileState extends State<Profile> {
                                             context,
                                             userData.user_email!,
                                             Icons.mail_sharp),
-
                                         buildProfileInfo(
                                             context,
                                             userData.user_HPno!,
                                             Icons.phone_android_outlined),
-
                                         buildProfileInfo(
                                             context,
                                             userData.user_gender!,
                                             Icons.phone_android_outlined),
-
-
-                                        //address here
-                                        buildProfileInfo(
-                                            context,
-                                            getAddress(userData),
-                                            Icons.location_on_outlined),
-
                                       ],
                                     ),
                                   ),
@@ -133,7 +120,6 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ],
                             ),
-                            
                           ],
                         );
                       } else {
@@ -169,24 +155,14 @@ class _ProfileState extends State<Profile> {
                                             context,
                                             userData.user_email!,
                                             Icons.mail_sharp),
-
                                         buildProfileInfo(
                                             context,
                                             userData.user_HPno!,
                                             Icons.phone_android_outlined),
-
                                         buildProfileInfo(
                                             context,
                                             userData.user_gender!,
                                             Icons.phone_android_outlined),
-
-
-                                        //address here
-                                        buildProfileInfo(
-                                            context,
-                                            getAddress(userData),
-                                            Icons.location_on_outlined),
-
                                       ],
                                     ),
                                   ),
@@ -200,30 +176,13 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ],
                             ),
-                            
                           ],
                         );
                       }
                     }),
-              ), */
+              ),
             ),
           );
-  }
-
-
-  String getAddress(UserData userData) {
-    List<String> values = [
-      userData.user_addStreet1.toString(),
-      userData.user_addStreet2.toString(),
-      '${userData.user_addPostcode} ${userData.user_addCity}',
-      userData.user_addState.toString()
-    ];
-    if (values.toSet().toList().toString() == '[,  ]') {
-      return '';
-    } else {
-      String result = values.map((val) => val.trim()).join(',\n');
-      return result;
-    }
   }
 
   SizedBox buildProfileInfo(

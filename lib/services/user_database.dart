@@ -4,9 +4,8 @@ import 'package:attendance_vimigo/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class UserDatabaseService {
-  final String? uid; //uid = user id 
+  final String? uid;
   UserDatabaseService({this.uid});
 
   //collection reference
@@ -18,16 +17,16 @@ class UserDatabaseService {
       'user_name': firstname,
       'user_lastName': lastname,
       'user_email': email,
+      'user_matricNo': '',
       'user_HPno': '',
       'user_gender': '',
+      'user_dob': '',
       'user_addStreet1': '',
       'user_addStreet2': '',
       'user_addPostcode': '',
       'user_addCity': '',
       'user_addState': '',
       'user_photo': '',
-      'user_role': 'surrender',
-
     });
   }
 
@@ -35,8 +34,10 @@ class UserDatabaseService {
     return await userCollection.doc(uid).update({
       'user_name': userData.user_name,
       'user_lastName': userData.user_lastName,
+      'user_matricNo': userData.user_matricNo,
       'user_HPno': userData.user_HPno,
       'user_gender': userData.user_gender,
+      'user_dob': userData.user_dob,
       'user_addStreet1': userData.user_addStreet1,
       'user_addStreet2': userData.user_addStreet2,
       'user_addPostcode': userData.user_addPostcode,
@@ -52,8 +53,10 @@ class UserDatabaseService {
         user_lastName: snapshot['user_lastName'],
         user_email: snapshot['user_email'],
         user_photo: snapshot['user_photo'],
+        user_matricNo: snapshot['user_matricNo'],
         user_HPno: snapshot['user_HPno'],
         user_gender: snapshot['user_gender'],
+        user_dob: snapshot['user_dob'],
         user_addStreet1: snapshot['user_addStreet1'],
         user_addStreet2: snapshot['user_addStreet2'],
         user_addPostcode: snapshot['user_addPostcode'],
@@ -71,8 +74,10 @@ class UserDatabaseService {
           user_lastName: doc.get('user_lastName'),
           user_email: doc.get('user_email'),
           user_photo: doc.get('user_photo'),
+          user_matricNo: doc.get('user_matricNo'),
           user_HPno: doc.get('user_HPno'),
           user_gender: doc.get('user_gender'),
+          user_dob: doc.get('user_dob'),
           user_addStreet1: doc.get('user_addStreet1'),
           user_addStreet2: doc.get('user_addStreet2'),
           user_addPostcode: doc.get('user_addPostcode'),
@@ -95,6 +100,5 @@ class UserDatabaseService {
   Stream<List<UserData>> get userDataList {
     return userCollection.snapshots().map(_userListFromSnapshot);
   }
-
 
 }

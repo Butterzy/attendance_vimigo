@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "517408302886",
-    "project_id": "attendancevimigo",
-    "storage_bucket": "attendancevimigo.appspot.com"
+    "project_number": "711991453915",
+    "project_id": "attendance-6f601",
+    "storage_bucket": "attendance-6f601.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:517408302886:android:6b73b113e2e54041a943e7",
+        "mobilesdk_app_id": "1:711991453915:android:0bfd91b2b3dd9ac72e44fe",
         "android_client_info": {
           "package_name": "com.example.attendance_vimigo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "517408302886-palpl801pt1mgl5ovjcar6o5ub5068go.apps.googleusercontent.com",
+          "client_id": "711991453915-v0kfircj21bjirg6e8m7labq9urvsnjp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBbAtPxQxe6_hOdxAOQmvPnCTsb0mpTvq4"
+          "current_key": "AIzaSyDIe-bhinxt3wj_p59iPL8_rDYwdc-5igA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "517408302886-palpl801pt1mgl5ovjcar6o5ub5068go.apps.googleusercontent.com",
+              "client_id": "711991453915-v0kfircj21bjirg6e8m7labq9urvsnjp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

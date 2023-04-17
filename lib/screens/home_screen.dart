@@ -1,26 +1,31 @@
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:attendance_vimigo/models/attendance.dart';
+
 import 'package:attendance_vimigo/models/user.dart';
-import 'package:attendance_vimigo/screens/add_attendance.dart';
+import 'package:attendance_vimigo/screens/attendance_list.dart';
+
 import 'package:attendance_vimigo/screens/profile/profile.dart';
+import 'package:attendance_vimigo/services/attendance_database.dart';
+
+import 'package:attendance_vimigo/shared/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  final bool isCheckedIn;
+  HomeScreen({Key? key, required this.isCheckedIn}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<thisUser?>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -52,17 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ))
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(onPressed: (){
-Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddScreen(),
-                    ));
-
-      },
-      child: Icon(Icons.add),
-),
       backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: Column(
@@ -94,6 +88,27 @@ Navigator.push(
                 borderRadius: BorderRadius.circular(100),
               ),
             ),
+            MultiProvider(
+              providers: [
+                StreamProvider<List<AttendanceData>>.value(
+                    initialData: [],
+                    value: AttendanceDatabaseService().attendanceDatalist),
+              ],
+              child: SingleChildScrollView(
+                child: Container(child: AttendanceList())
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                String attendance_time = DateTime.now().toString();
+                dynamic result = await AttendanceDatabaseService(uid: user!.uid)
+                    .attendanceEvent(attendance_time)
+                    .whenComplete(() {
+                  showSuccessSnackBar('Check in Done !', context);
+                }).catchError((e) => showFailedSnackBar(e.toString(), context));
+              },
+              child: Icon(Icons.add),
+            )
           ],
         ),
       ),

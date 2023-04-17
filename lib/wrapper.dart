@@ -16,7 +16,7 @@ class wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return HomeScreen();
+      return HomeScreen(isCheckedIn: false,);
     }
   }
 }
