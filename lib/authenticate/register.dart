@@ -23,8 +23,10 @@ class _RegisterState extends State<Register> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController positionController = TextEditingController();
+    final TextEditingController departmentController = TextEditingController();
+      final TextEditingController phonenoController = TextEditingController();
   String error = '';
 
   @override
@@ -64,11 +66,17 @@ class _RegisterState extends State<Register> {
                         buildEmailForm(
                             emailController, 'Email', emailValidator),
                         const SizedBox(height: 20.0),
-                        buildNameForm(firstNameController, 'First Name',
+                        buildNameForm(nameController, 'Name',
                             nameValidator),
                         const SizedBox(height: 20.0),
                         buildNameForm(
-                            lastNameController, 'Last Name', nameValidator),
+                            positionController, 'Position', positionValidator),
+                        const SizedBox(height: 20.0),
+                        buildNameForm(
+                            departmentController, 'Department', departmentValidator),
+                        const SizedBox(height: 20.0),
+                        buildNameForm(
+                            phonenoController, 'Phone Number', departmentValidator),
                         const SizedBox(height: 20.0),
                         buildPasswordForm(passwordController, 'Password',
                             passwordValidator, TextInputAction.next),
@@ -87,8 +95,11 @@ class _RegisterState extends State<Register> {
                                   await _auth.registerWithEmailAndPassword(
                                       emailController.text,
                                       passwordController.text,
-                                      firstNameController.text,
-                                      lastNameController.text);
+                                      nameController.text,
+                                      positionController.text,
+                                      departmentController.text,
+                                      phonenoController.text
+                                      );
                               if (result == null) {
                                 setState(() {
                                   error = 'Please supply a valid email';

@@ -55,15 +55,8 @@ class _SignInState extends State<SignIn> {
                               fit: BoxFit.contain,
                             ),
                           ),
-                          const SizedBox(height: 20.0),
-                          Text(
-                            'Pet Adoption System',
-                            style: //customize textStyle in theme() method
-                                Theme.of(context)
-                                    .textTheme
-                                    .headline4!
-                                    .copyWith(color: Colors.indigo),
-                          ),
+  
+
                           const SizedBox(height: 20.0),
                           SizedBox(child: buildEmailForm(emailController, 'Email'),width: 500,),
                           const SizedBox(height: 20.0),

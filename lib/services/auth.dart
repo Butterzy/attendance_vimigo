@@ -43,12 +43,8 @@ class AuthService {
   }
 
   // register with email
-  Future registerWithEmailAndPassword(
-    String email,
-    String password,
-    String firstName,
-    String lastName,
-  ) async {
+  Future registerWithEmailAndPassword(String email, String password,
+      String name, String position, String department, String phNo) async {
     try {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -56,7 +52,7 @@ class AuthService {
 
       //create a new document for the user with the uid
       await UserDatabaseService(uid: user!.uid)
-          .createUserData(firstName, lastName, email);
+          .createUserData(name, email, phNo, position, department);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -75,16 +71,6 @@ class AuthService {
     } catch (e) {
       print(e.toString());
       return false;
-    }
-  }
-
-  // change password
-  Future changePassword(String password) async {
-    try {
-      User? user = _auth.currentUser;
-      return await user?.updatePassword(password);
-    } catch (e) {
-      print(e.toString());
     }
   }
 

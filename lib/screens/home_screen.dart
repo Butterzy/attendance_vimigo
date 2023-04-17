@@ -2,7 +2,7 @@ import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:attendance_vimigo/models/attendance.dart';
 
 import 'package:attendance_vimigo/models/user.dart';
-import 'package:attendance_vimigo/screens/attendance_list.dart';
+import 'package:attendance_vimigo/screens/attendance/attendance_list.dart';
 
 import 'package:attendance_vimigo/screens/profile/profile.dart';
 import 'package:attendance_vimigo/services/attendance_database.dart';
@@ -77,17 +77,44 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset('assets/images/purple.jpg'),
-              ),
+              Stack(children: <Widget>[
+                Positioned(
+                  child: ClipRRect(
+                     borderRadius: BorderRadius.circular(30),
+                    child: Image.asset('assets/images/purple.jpg'),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(55),
+                  width: MediaQuery.of(context).size.width - 300,
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white12,
+                  ),
+                  child: Text(
+                    'Make each day your masterpiece',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
+                  ),
+                ),
+                Positioned(
+                  width: 400,
+                  top: 150,
+                  left: 0,
+                  child: Image.asset('assets/images/3.gif'),
+                ),
+                Positioned(
+                  width: 200,
+                  top: 170,
+                  right: 0,
+                  child: Image.asset('assets/images/4.png'),
+                )
+              ]),
             ])),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(100),
-              ),
-            ),
             MultiProvider(
               providers: [
                 StreamProvider<List<AttendanceData>>.value(
@@ -95,10 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     value: AttendanceDatabaseService().attendanceDatalist),
               ],
               child: SingleChildScrollView(
-                child: Container(child: AttendanceList())
-              ),
+                  child: Container(child: AttendanceList())),
             ),
             ElevatedButton(
+
               onPressed: () async {
                 String attendance_time = DateTime.now().toString();
                 dynamic result = await AttendanceDatabaseService(uid: user!.uid)
@@ -107,41 +134,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   showSuccessSnackBar('Check in Done !', context);
                 }).catchError((e) => showFailedSnackBar(e.toString(), context));
               },
-              child: Icon(Icons.add),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             )
           ],
         ),
       ),
-    );
-  }
-
-  GestureDetector buildProfileAvatar(UserData? userData) {
-    return GestureDetector(
-      child: CircleAvatar(
-        backgroundColor: Colors.indigo,
-        radius: 60.0,
-        child: CircleAvatar(
-          backgroundImage: userData!.user_photo!.isNotEmpty
-              ? NetworkImage('${userData.user_photo}')
-              : const AssetImage('assets/images/logo.png') as ImageProvider,
-          radius: 55.0,
-          backgroundColor: Colors.white,
-          child: Stack(
-            children: const [
-              Align(
-                alignment: Alignment.bottomRight,
-                child: CircleAvatar(
-                  radius: 17.0,
-                  child: Icon(Icons.edit),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      onTap: () {
-        Profile();
-      },
     );
   }
 }

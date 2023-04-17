@@ -1,11 +1,13 @@
 import 'package:attendance_vimigo/models/attendance.dart';
+import 'package:attendance_vimigo/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AttendanceDatabaseService {
   final String? uid;
   final String? aid;
-  AttendanceDatabaseService({this.uid, this.aid});
+  final String? name;
+  AttendanceDatabaseService({this.uid, this.aid,this.name});
 
   //registration.......................................................
 
@@ -16,6 +18,7 @@ class AttendanceDatabaseService {
     return await attendanceCollection.doc().set({
       'user_ID': uid,
       'attendance_time': attendance_time,
+      'user_name': name,
     });
   }
 

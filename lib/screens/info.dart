@@ -3,17 +3,17 @@ import 'package:attendance_vimigo/services/auth.dart';
 import 'package:attendance_vimigo/services/user_database.dart';
 import 'package:attendance_vimigo/shared/constant.dart';
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+class InfoScreen extends StatefulWidget {
+  const InfoScreen({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<InfoScreen> createState() => _InfoScreenState();
 }
 
-class _ProfileState extends State<Profile> {
+class _InfoScreenState extends State<InfoScreen> {
   final AuthService _auth = AuthService();
   bool isLoading = false;
 
@@ -24,12 +24,12 @@ class _ProfileState extends State<Profile> {
         ? loadingIndicator()
         : Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.amber),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
+               leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.amber),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
               centerTitle: true,
-              title: Text("Profile",
+              title: Text("Vimigo",
                   overflow: TextOverflow.clip,
                   style: const TextStyle(
                       color: Color.fromRGBO(255, 143, 0, 1),
@@ -40,24 +40,21 @@ class _ProfileState extends State<Profile> {
               elevation: 3,
               actions: [
                 IconButton(
-                    onPressed: () async {
-                      setState(() => isLoading = true);
-                      await _auth.signOut().then((value) {
-                        showSuccessSnackBar('Signed Out', context);
-                      }).catchError((e) {
-                        showFailedSnackBar(e.toString(), context);
-                      });
+                    onPressed: () {
+                      final Uri whatsappUrl =
+                          Uri.parse('https://wa.me/60162246827?text=Hello%20from%20Flutter%20');
+
+                      launchUrl(whatsappUrl);
                     },
-                    icon: const Icon(
-                      Icons.logout_outlined,
-                      color: Colors.white,
+                    icon: Icon(
+                      Icons.share,
+                      color: Colors.amber,
                     ))
               ],
             ),
             backgroundColor: Colors.white,
             body: Center(
               child: Container(
-                margin: EdgeInsets.all(20),
                 width: MediaQuery.of(context).size.width,
                 child: StreamBuilder<UserData>(
                     stream: UserDatabaseService(uid: user!.uid).userData,
@@ -89,23 +86,24 @@ class _ProfileState extends State<Profile> {
                                         bottomLeft: Radius.circular(45),
                                       ),
                                     ),
-                                    width: MediaQuery.of(context).size.width,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
                                     child: Column(
                                       children: [
                                         buildNameTitle(context, userData),
-                                        buildProfileInfo(
+                                        buildInfoScreenInfo(
                                             context,
                                             userData!.user_email!,
                                             Icons.mail_sharp),
-                                        buildProfileInfo(
+                                        buildInfoScreenInfo(
                                             context,
                                             userData.user_HPno!,
                                             Icons.phone_android_outlined),
-                                        buildProfileInfo(
+                                        buildInfoScreenInfo(
                                             context,
                                             userData.user_position!,
                                             Icons.person),
-                                        buildProfileInfo(
+                                        buildInfoScreenInfo(
                                             context,
                                             userData.user_department!,
                                             Icons.category),
@@ -113,17 +111,13 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   ),
                                 ),
+
                                 Positioned(
-                                  width: 300,
-                                    top: 0.0,
-                                    left: 450.0,
-                                    child: Image.asset('assets/images/1.png')),
-                                //avatar
-                                Positioned(
-                                  top: 0.0,
-                                  left: 100.0,
-                                  child: buildProfileAvatar(userData),
-                                ),
+                  width: 600,
+                  top: 150,
+                  left: 300,
+                  child: Image.asset('assets/images/2.png'),
+                ),
                               ],
                             ),
                           ],
@@ -137,7 +131,7 @@ class _ProfileState extends State<Profile> {
           );
   }
 
-  SizedBox buildProfileInfo(
+  SizedBox buildInfoScreenInfo(
       BuildContext context, String userData, IconData icon) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -171,7 +165,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  GestureDetector buildProfileAvatar(UserData? userData) {
+  GestureDetector buildInfoScreenAvatar(UserData? userData) {
     return GestureDetector(
       child: CircleAvatar(
         backgroundColor: Colors.amber,

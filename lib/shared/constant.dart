@@ -6,7 +6,7 @@ Container loadingIndicator() {
     color: Colors.white,
     child: const Center(
       child: SpinKitHourGlass(
-        color: Colors.indigo,
+        color: Colors.amber,
         size: 50.0,
       ),
     ),
@@ -151,3 +151,5 @@ String? positionValidator(value) {
     return 'Please enter your position';
   }
 }
+
+var ThisUserName = '';
