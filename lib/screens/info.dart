@@ -61,7 +61,6 @@ class _InfoScreenState extends State<InfoScreen> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         UserData? userData = snapshot.data;
-                        ThisUserName == userData?.user_name;
                         return ListView(
                           children: [
                             Stack(

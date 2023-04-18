@@ -151,5 +151,3 @@ String? positionValidator(value) {
     return 'Please enter your position';
   }
 }
-
-var ThisUserName = '';

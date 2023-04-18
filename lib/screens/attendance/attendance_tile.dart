@@ -28,8 +28,6 @@ class _AttendanceTileState extends State<AttendanceTile> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<thisUser?>(context);
-    debugPrint('this is ' + user!.uid.toString());
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: GestureDetector(
@@ -38,9 +36,11 @@ class _AttendanceTileState extends State<AttendanceTile> {
             elevation: 2.0,
             margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 6.0),
             child: ListTile(
-              title: Text(widget.attendanceData!.user_ID.toString()),
+              title: Text(widget.attendanceData.user_ID.toString()),
               subtitle: Text(
-                  'Check in ${_isDateFormatted ? DateFormat('dd MMM yyyy, h:mm a').format(DateTime.parse(widget.attendanceData!.attendance_time!)) : timeago.format(DateTime.parse(widget.attendanceData!.attendance_time!))}'),
+                  'Check in ${_isDateFormatted ? DateFormat('dd MMM yyyy, h:mm a').
+                  format(DateTime.parse(widget.attendanceData.attendance_time!)) 
+                  : timeago.format(DateTime.parse(widget.attendanceData.attendance_time!))}'),
               trailing: IconButton(
                 icon: Icon(_isDateFormatted
                     ? Icons.calendar_today

@@ -9,7 +9,7 @@ class AttendanceDatabaseService {
   final String? name;
   AttendanceDatabaseService({this.uid, this.aid,this.name});
 
-  //registration.......................................................
+  //attendance.......................................................
 
   final CollectionReference attendanceCollection =
       FirebaseFirestore.instance.collection('attendances');

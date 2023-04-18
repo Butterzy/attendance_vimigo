@@ -29,9 +29,9 @@ class _ProfileState extends State<Profile> {
                 onPressed: () => Navigator.of(context).pop(),
               ),
               centerTitle: true,
-              title: Text("Profile",
+              title: const Text("Profile",
                   overflow: TextOverflow.clip,
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: Color.fromRGBO(255, 143, 0, 1),
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0)),
@@ -50,7 +50,7 @@ class _ProfileState extends State<Profile> {
                     },
                     icon: const Icon(
                       Icons.logout_outlined,
-                      color: Colors.white,
+                      color: Colors.amber,
                     ))
               ],
             ),
@@ -64,7 +64,7 @@ class _ProfileState extends State<Profile> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         UserData? userData = snapshot.data;
-                        ThisUserName == userData?.user_name;
+
                         return ListView(
                           children: [
                             Stack(
